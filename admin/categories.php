@@ -1,5 +1,5 @@
 <?php
-include "includes/header.php";
+include "includes/admin_header.php";
 ?>
 
 
@@ -9,7 +9,7 @@ include "includes/header.php";
 
     <!-- Navigation -->
     <?php
-    include "includes/navigation.php";
+    include "includes/admin_navigation.php";
     ?>
 
     <div id="page-wrapper">
@@ -36,8 +36,9 @@ include "includes/header.php";
 
                         </form>
                     </div>
-                    
+
                     <div class="col-xs-6">
+
                         <table class="table table-bordered table-hover">
                             <thead>
                             <tr>
@@ -46,10 +47,18 @@ include "includes/header.php";
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Baseball Category</td>
-                                <td>Test Category</td>
-                            </tr>
+                                <?php
+                                $query = "SELECT * FROM category";
+                                $select_categories_sidebar = mysqli_query($connection, $query);
+
+                                while ($result = mysqli_fetch_assoc($select_categories_sidebar)) {
+                                    $cat_title = $result["cat_title"];
+                                    $cat_id = $result["cat_id"];
+                                    echo "<tr>"."<td>{$cat_id}</td>
+                                          <td>{$cat_title}</td>"."</tr>";
+
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -65,5 +74,5 @@ include "includes/header.php";
     <!-- /#page-wrapper -->
 
     <?php
-    include "includes/footer.php";
+    include "includes/admin_footer.php";
     ?>
