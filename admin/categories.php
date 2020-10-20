@@ -25,27 +25,9 @@ include "includes/admin_header.php";
                     </h1>
 
                     <div class="col-xs-6">
-                        <?php
-                        if(isset($_POST["submit"])){
-                            $cat_title = $_POST["cat_title"];
 
-                            if($cat_title == "" || empty($cat_title)){
-                                echo "This field should not be empty";
-                            }else{
+                        <?php create_category(); ?>
 
-                                $query = "INSERT INTO category(cat_title)";
-                                $query .= "VALUE('$cat_title')";
-
-                                $create_category_query = mysqli_query($connection, $query);
-
-                                if(!$create_category_query){
-                                    die('QUERY FAILED' . mysqli_error($connection));
-                                }
-                            }
-
-
-                        }
-                        ?>
                         <form action="" method="post">
                             <div class="form-group">
                                 <label for="cat_title">Category Name</label>
@@ -56,6 +38,11 @@ include "includes/admin_header.php";
                             </div>
 
                         </form>
+
+                        <?php
+                        include "includes/edit_category.php";
+                        ?>
+
                     </div>
 
                     <div class="col-xs-6">
@@ -65,21 +52,16 @@ include "includes/admin_header.php";
                             <tr>
                                 <th>Id</th>
                                 <th>Category Title</th>
+                                <th colspan="2">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                $query = "SELECT * FROM category";
-                                $select_categories_sidebar = mysqli_query($connection, $query);
 
-                                while ($result = mysqli_fetch_assoc($select_categories_sidebar)) {
-                                    $cat_title = $result["cat_title"];
-                                    $cat_id = $result["cat_id"];
-                                    echo "<tr>"."<td>{$cat_id}</td>
-                                          <td>{$cat_title}</td>"."</tr>";
+                            <?php
+                            delete_category();
+                            ?>
 
-                                }
-                                ?>
+
                             </tbody>
                         </table>
                     </div>
