@@ -58,6 +58,7 @@ include "includes/admin_header.php";
                             <tbody>
 
                             <?php
+                            display_categories();
                             delete_category();
                             ?>
 
